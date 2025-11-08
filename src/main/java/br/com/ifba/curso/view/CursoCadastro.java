@@ -123,6 +123,7 @@ public class CursoCadastro extends javax.swing.JFrame {
 
     private void btnRealizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarCadastroActionPerformed
         // TODO add your handling code here:
+        //Faz a imagem na Tela
         JOptionPane.showMessageDialog(this, "Cadastro Realizado com sucesso!");
     }//GEN-LAST:event_btnRealizarCadastroActionPerformed
 
