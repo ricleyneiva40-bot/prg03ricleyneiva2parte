@@ -8,9 +8,7 @@ package br.com.ifba;
  *
  * @author ricle
  */
-public class Prg03ricleyneiva_2parte {
+public class CursoSave {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+    
 }
