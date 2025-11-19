@@ -21,6 +21,6 @@ public interface GenericIDao<Entity extends PersistenceEntity> {
     
     public abstract List<Entity> findAll();
     
-    public abstract Entity findByLd(Long id);
+    public abstract Entity findById(Long id);
     
 }

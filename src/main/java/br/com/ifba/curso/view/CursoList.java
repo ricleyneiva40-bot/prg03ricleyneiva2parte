@@ -4,8 +4,8 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.ifba.curso.dao.CursoDao;
-import br.com.ifba.curso.dao.CursoIDao;
+import br.com.ifba.curso.controller.CursoController;
+import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,6 +24,8 @@ import javax.swing.table.TableRowSorter;
 public class CursoList extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CursoList.class.getName());
+
+    private final CursoIController controller = new CursoController();
 
     
     private TableRowSorter<DefaultTableModel> sorter;
@@ -180,32 +182,30 @@ public class CursoList extends javax.swing.JFrame {
     
     private void preencherTabela() {
 
-        // 1. Pega o "modelo" da tabela (DefaultTableModel) para que possamos 
+        // Pega o "modelo" da tabela (DefaultTableModel) para que possamos 
         //    adicionar ou remover linhas dele.
         DefaultTableModel model = (DefaultTableModel) tblCursos.getModel();
 
-        // 2. Linha CRUCIAL: Limpa a tabela, removendo todas as linhas antigas.
+        // Linha CRUCIAL: Limpa a tabela, removendo todas as linhas antigas.
         //    Isso evita duplicar dados toda vez que atualizamos.
         model.setRowCount(0);
 
         btnEdit.setEnabled(false);
         btnDelete.setEnabled(false);
 
-        // 3. Cria uma instância do nosso DAO (a classe que "fala" com o banco).
-        CursoIDao cursoDAO = new CursoDao();
 
-        // 4. Chama o método do DAO que vai ao banco e retorna a lista de Cursos.
-        List<Curso> cursos = cursoDAO.findAll();
+        // Chama o método do DAO que vai ao banco e retorna a lista de Cursos.
+        List<Curso> cursos = controller.findAll();
 
-        // 5. Boa prática: Verifica se a lista não veio nula 
+        // Boa prática: Verifica se a lista não veio nula 
         //    (o que pode acontecer se o DAO der erro e retornar 'null').
         if (cursos != null) {
-            // 6. Itera (passa por) cada objeto 'curso' dentro da lista 'cursos'.
+            // Itera (passa por) cada objeto 'curso' dentro da lista 'cursos'.
             for (Curso curso : cursos) {
 
-                // 7. Adiciona uma nova linha na tabela.
+                // Adiciona uma nova linha na tabela.
                 model.addRow(new Object[]{
-                    // 8. Cria um "array de objetos" que representa os dados de UMA linha.
+                    // Cria um "array de objetos" que representa os dados de UMA linha.
                     //    IMPORTANTE: A ordem aqui deve ser a mesma das colunas da tabela.
                     curso.getNome(), // Coluna 0: "Nome"
                     curso.getCodigo(), // Coluna 1: "Codigo do Curso"
@@ -252,9 +252,9 @@ public class CursoList extends javax.swing.JFrame {
         // 4. Pega o CÓDIGO (que é a Chave Primária) da coluna 1 do modelo.
         String codigoCurso = (String) tblCursos.getModel().getValueAt(modelRow, 1);
 
-        // 5. USA O DAO para buscar o objeto 'Curso' COMPLETO no banco
-        CursoIDao cursoDAO = new CursoDao();
-        Curso cursoParaEditar = cursoDAO.buscarPorCodigo(codigoCurso);
+        // 5. USA O Controller para buscar o objeto 
+        Curso cursoParaEditar = controller.findByCodigo(codigoCurso).stream()
+        .findFirst().orElse(null);
 
         // 6. Verifica se o curso foi encontrado
         if (cursoParaEditar != null) {
@@ -311,14 +311,15 @@ public class CursoList extends javax.swing.JFrame {
         // 6. Verifica se o usuário clicou em "SIM" (YES_OPTION)
         if (confirm == JOptionPane.YES_OPTION) {
 
-            CursoIDao cursoDAO = new CursoDao();
+            
             try {
                 // 7. Busca o objeto 'Curso' COMPLETO usando o código
-                Curso cursoParaExcluir = cursoDAO.buscarPorCodigo(codigoCurso);
+               Curso cursoParaExcluir = controller.findByCodigo(codigoCurso)
+        .stream().findFirst().orElse(null);
 
                 if (cursoParaExcluir != null) {
-                    // 8. Chama o método de excluir do DAO
-                    cursoDAO.delete(cursoParaExcluir);
+                    // 8. Chama o método de excluir do Controller
+                    controller.delete(cursoParaExcluir);
 
                     // 9. Mostra mensagem de sucesso
                     JOptionPane.showMessageDialog(this, "Curso excluído com sucesso!");
@@ -332,7 +333,7 @@ public class CursoList extends javax.swing.JFrame {
                 }
 
             } catch (Exception e) {
-                // 11. Mostra uma mensagem de erro se o DAO falhar
+                // 11. Mostra uma mensagem de erro se o Controller falhar
                 JOptionPane.showMessageDialog(this,
                         "Falha ao excluir o curso: " + e.getMessage(),
                         "Erro de Banco de Dados",

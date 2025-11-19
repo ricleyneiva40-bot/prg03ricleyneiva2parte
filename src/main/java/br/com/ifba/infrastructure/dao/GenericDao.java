@@ -115,8 +115,8 @@ public class GenericDao<Entity extends PersistenceEntity> implements GenericIDao
     }
 
     @Override
-    //Metodo de nuscar pelo Id
-    public Entity findByLd(Long id) {
+    //Metodo de nuscar pelo Id.
+    public Entity findById(Long id) {
        EntityManager entityManager = entityManagerFactory.createEntityManager();
        
        try{
