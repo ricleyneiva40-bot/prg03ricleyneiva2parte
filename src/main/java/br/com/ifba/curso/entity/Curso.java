@@ -29,12 +29,14 @@ public class Curso extends PersistenceEntity implements Serializable{
     public Curso() {
     }
 
+    //Construtor
     public Curso(String codigo, String nome, boolean ativo) {
         this.codigoCurso = codigo;
         this.nome = nome;
         this.ativo = ativo;
     }
 
+    //Getters e Setters
     public String getCodigo() {
         return codigoCurso;
     }

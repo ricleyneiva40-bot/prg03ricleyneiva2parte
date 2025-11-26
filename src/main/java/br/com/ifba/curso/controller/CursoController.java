@@ -14,9 +14,11 @@ import org.springframework.stereotype.Controller;
  *
  * @author ricle
  */
+//Controller ja com Spring 
 @Controller
 public class CursoController implements CursoIController{
 
+    //Aqui onde ficam as regras de negocio, sem acoplamento
     @Autowired
     private CursoIService cursoService;
     

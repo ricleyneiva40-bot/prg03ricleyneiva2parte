@@ -135,7 +135,7 @@ public class CursoAdd extends javax.swing.JDialog {
             controller.save(curso);
 
             // --- ETAPA 3: RESPOSTA DE SUCESSO ---
-            // 5. Se a linha 'cursoDAO.salvar(curso)' NÃO deu erro (não lançou exceção),
+            // 5. Se a linha 'controller.salvar(curso)' NÃO deu erro (não lançou exceção),
             //    significa que o salvamento foi um sucesso.
             JOptionPane.showMessageDialog(this,
                     "Curso criado com sucesso",
@@ -150,7 +150,7 @@ public class CursoAdd extends javax.swing.JDialog {
         } catch (Exception e) {
             // --- ETAPA 4: RESPOSTA DE FALHA ---
 
-            // 7. Se o 'cursoDAO.salvar()' lançou uma exceção ('throw e'),
+            // 7. Se o 'controller.salvar()' lançou uma exceção ('throw e'),
             //    o código pula para este bloco 'catch'.
             JOptionPane.showMessageDialog(this,
                     "Falha ao salvar o curso: " + e.getMessage(), // Mostra a msg de erro
