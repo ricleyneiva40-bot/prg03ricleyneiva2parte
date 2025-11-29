@@ -7,7 +7,7 @@ package br.com.ifba.curso.controller;
 import br.com.ifba.curso.entity.Curso;
 import br.com.ifba.curso.service.CursoIService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -16,11 +16,11 @@ import org.springframework.stereotype.Controller;
  */
 //Controller ja com Spring 
 @Controller
+@RequiredArgsConstructor
 public class CursoController implements CursoIController{
 
     //Aqui onde ficam as regras de negocio, sem acoplamento
-    @Autowired
-    private CursoIService cursoService;
+    private final CursoIService cursoService;
     
     @Override
     public void save(Curso curso) {

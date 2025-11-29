@@ -4,7 +4,6 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.ifba.curso.controller.CursoController;
 import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import javax.swing.JOptionPane;

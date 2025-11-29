@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Long>{
     
-    // Busca um Curso pelo atributo codigoCurso da entidade
-    Curso findByCodigoCurso(String codigo);
+    // Busca um Curso pelo atributo codigo da entidade
+    Curso findByCodigo(String codigo);
 }

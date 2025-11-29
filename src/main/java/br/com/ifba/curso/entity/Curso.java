@@ -9,6 +9,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -16,9 +19,12 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "Cursos")
+@Data //Pra gerar os Getters e Setters e demais comando do Data
+@NoArgsConstructor //Anotação pra criar o Construtor vazio
+@AllArgsConstructor //Anotação pra cirar o Construtor com os atributos
 public class Curso extends PersistenceEntity implements Serializable{
     @Column(name = "codigo", nullable = false, unique = true)
-    private String codigoCurso;
+    private String codigo;
     
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -26,39 +32,5 @@ public class Curso extends PersistenceEntity implements Serializable{
     @Column(name = "Ativo") 
     private boolean ativo;
 
-    public Curso() {
-    }
-
-    //Construtor
-    public Curso(String codigo, String nome, boolean ativo) {
-        this.codigoCurso = codigo;
-        this.nome = nome;
-        this.ativo = ativo;
-    }
-
-    //Getters e Setters
-    public String getCodigo() {
-        return codigoCurso;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigoCurso = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-    
+   
 }
