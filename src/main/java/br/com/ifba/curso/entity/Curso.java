@@ -8,7 +8,6 @@ import br.com.ifba.infrastructure.entity.PersistenceEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data //Pra gerar os Getters e Setters e demais comando do Data
 @NoArgsConstructor //Anotação pra criar o Construtor vazio
 @AllArgsConstructor //Anotação pra cirar o Construtor com os atributos
-public class Curso extends PersistenceEntity implements Serializable{
+public class Curso extends PersistenceEntity {
     @Column(name = "codigo", nullable = false, unique = true)
     private String codigo;
     
